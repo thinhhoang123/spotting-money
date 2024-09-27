@@ -1,3 +1,4 @@
+'use client';
 import { CircleUser, Menu } from 'lucide-react';
 import Link from 'next/link';
 import {
@@ -11,66 +12,44 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '../ui/button';
 import Typography from '../typography';
+import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 
 const navItems = [
   { label: 'Dashboard', href: '#' },
-  { label: 'Tracking', href: '#' },
+  { label: 'Trackings', href: '/trackings' },
   { label: 'Savings', href: '#' },
   { label: 'Goals', href: '#' },
   { label: 'Settings', href: '#' },
 ];
 
 export default function AppHeader() {
+  const { data: session } = useSession();
+  const pathname = usePathname();
+
   const renderNavItem = () => {
     return navItems.map((item) => {
-      return (
-        <Link
-          key={item.label}
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          {item.label}
-        </Link>
-      );
+      if (session)
+        return (
+          <Link
+            key={item.label}
+            href={item.href}
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {item.label}
+          </Link>
+        );
+      return null;
     });
   };
-  return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-        <div className="text-nowrap">
-          <Typography type="h3">Spotting Money</Typography>
-        </div>
-        {renderNavItem()}
-      </nav>
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline" size="icon" className="shrink-0 md:hidden">
-            <Menu className="h-5 w-5" />
-            <span className="sr-only">Toggle navigation menu</span>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left">
-          <nav className="grid gap-6 text-lg font-medium">
-            <Link
-              href="#"
-              className="flex items-center gap-2 text-lg font-semibold"
-            >
-              <div className="text-nowrap">
-                <Typography type="h3">Spotting Money</Typography>
-              </div>
-            </Link>
-            {renderNavItem()}
-          </nav>
-        </SheetContent>
-      </Sheet>
-      <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+
+  const renderRightNavItem = () => {
+    if (session)
+      return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant="secondary"
-              size="icon"
-              className="rounded-full ml-auto"
-            >
+            <Button variant="secondary" size="icon" className="rounded-full">
               <CircleUser className="h-5 w-5" />
               <span className="sr-only">Toggle user menu</span>
             </Button>
@@ -84,7 +63,72 @@ export default function AppHeader() {
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
+      );
+    if (pathname.includes('/login'))
+      return (
+        <Button variant="secondary">
+          <Link href="/sign-up">Sign up</Link>
+        </Button>
+      );
+    return (
+      <Button variant="secondary">
+        <Link href="/login">Login</Link>
+      </Button>
+    );
+  };
+
+  return (
+    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 justify-between">
+      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+        <div className="flex gap-2 items-center">
+          <Image src="/logo.svg" width={32} height={32} alt="logo" />
+          <div className="text-nowrap">
+            <Typography type="h3">Spotting Money</Typography>
+          </div>
+        </div>
+        {renderNavItem()}
+      </nav>
+      {/* Mobile */}
+      {session ? (
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              className="shrink-0 md:hidden"
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle navigation menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left">
+            <nav className="grid gap-6 text-lg font-medium">
+              <Link
+                href="#"
+                className="flex items-center gap-2 text-lg font-semibold"
+              >
+                <div className="flex gap-2 items-center">
+                  <Image src="/logo.svg" width={32} height={32} alt="logo" />
+                  <div className="text-nowrap">
+                    <Typography type="h3">Spotting Money</Typography>
+                  </div>
+                </div>
+              </Link>
+              {renderNavItem()}
+            </nav>
+          </SheetContent>
+        </Sheet>
+      ) : (
+        <Image
+          src="/logo.svg"
+          width={32}
+          height={32}
+          alt="logo"
+          className="md:hidden"
+        />
+      )}
+      {/* Mobile */}
+      {renderRightNavItem()}
     </header>
   );
 }
