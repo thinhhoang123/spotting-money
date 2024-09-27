@@ -13,8 +13,9 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '../ui/button';
 import Typography from '../typography';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 const navItems = [
   { label: 'Dashboard', href: '#' },
@@ -27,7 +28,7 @@ const navItems = [
 export default function AppHeader() {
   const { data: session } = useSession();
   const pathname = usePathname();
-
+  const isActiveItem = (href: string) => pathname.includes(href);
   const renderNavItem = () => {
     return navItems.map((item) => {
       if (session)
@@ -35,7 +36,10 @@ export default function AppHeader() {
           <Link
             key={item.label}
             href={item.href}
-            className="text-muted-foreground transition-colors hover:text-foreground"
+            className={cn(
+              'text-muted-foreground transition-colors hover:text-foreground',
+              isActiveItem(item.href) && 'text-foreground font-bold'
+            )}
           >
             {item.label}
           </Link>
@@ -50,7 +54,17 @@ export default function AppHeader() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
-              <CircleUser className="h-5 w-5" />
+              {session.user?.image ? (
+                <Image
+                  src={session.user.image}
+                  width={32}
+                  height={32}
+                  alt="user image"
+                  className="rounded-full"
+                />
+              ) : (
+                <CircleUser className="h-5 w-5" />
+              )}
               <span className="sr-only">Toggle user menu</span>
             </Button>
           </DropdownMenuTrigger>
@@ -60,7 +74,9 @@ export default function AppHeader() {
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => signOut()}>
+              Logout
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

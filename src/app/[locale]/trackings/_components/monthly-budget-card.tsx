@@ -3,8 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
@@ -16,7 +14,7 @@ export default function MonthlyBudgetCard() {
         <CardTitle>Monthly Budget</CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="min-h-60 w-full">
+        <ChartContainer config={chartConfig} className="max-h-[200px] w-full">
           <BarChart
             accessibilityLayer
             data={chartData}
@@ -32,7 +30,6 @@ export default function MonthlyBudgetCard() {
               axisLine={false}
             />
             <ChartTooltip content={<ChartTooltipContent />} />
-            <ChartLegend content={<ChartLegendContent />} />
             <Bar dataKey="amount" fill="var(--color-amount)" radius={8}>
               <LabelList position="top" />
             </Bar>

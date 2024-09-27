@@ -1,6 +1,5 @@
 {
-    "HomePage": {
-        "title": "Xin chào!",
-        "about": "Đi tới page nào đó"
-    }
+    "LOGIN": "Đăng nhập",
+    "LOGIN_SUBTITLE": "Nhập email của bạn dưới đây để đăng nhập vào tài khoản của bạn.",
+    "CONTINUE_WITH": "Tiếp tục với"
 }

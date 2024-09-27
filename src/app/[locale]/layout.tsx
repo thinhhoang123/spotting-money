@@ -4,8 +4,8 @@ import AppLayout from '@/components/layout/app-layout';
 import { Inter } from 'next/font/google';
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
-import { getSession } from 'next-auth/react';
 import SessionProvider from '@/providers/SessionProvider';
+import { getServerSession } from 'next-auth';
 
 const fonts = Inter({
   subsets: ['latin'],
@@ -25,7 +25,7 @@ export default async function RootLayout({
   params: { locale: string };
 }) {
   const messages = await getMessages();
-  const session = await getSession();
+  const session = await getServerSession();
   return (
     <html lang={locale}>
       <body className={`${fonts.className} antialiased`}>

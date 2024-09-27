@@ -1,6 +1,5 @@
 {
-    "HomePage": {
-        "title": "Hello world!",
-        "about": "Go to the about page"
-    }
+    "LOGIN": "Login",
+    "LOGIN_SUBTITLE": "Enter your email below to login to your account.",
+    "CONTINUE_WITH": "Or continue with"
 }

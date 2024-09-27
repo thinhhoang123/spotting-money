@@ -5,6 +5,7 @@ import { DataTableDemo } from '@/components/ui/data-table';
 import DatePicker from '@/components/ui/date-picker';
 import MonthlyBudgetCard from './_components/monthly-budget-card';
 import OverviewCard from './_components/overview-card';
+import StatisticCard from './_components/statistic-card';
 
 const cardData = [
   {
@@ -35,10 +36,10 @@ export default function TrackingsPage() {
         Tracking Money
       </Title>
       <section className="flex flex-col gap-4">
-        <Typography type="h4" className="text-muted-foreground">
+        <Typography type="h4" classNames="text-muted-foreground">
           May, 2024
         </Typography>
-        <div className="flex gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {cardData.map((item) => {
             return (
               <Card className="w-full" key={item.title}>
@@ -54,13 +55,14 @@ export default function TrackingsPage() {
         </div>
       </section>
 
-      <section className="grid grid-cols-6 gap-4">
-        <div className="col-span-4">
+      <section className="grid grid-cols-1 md:grid-cols-6 2xl:grid-cols-8 gap-4">
+        <div className="col-span-1 md:col-span-4 2xl:col-span-6">
           <DataTableDemo />
         </div>
-        <div className="col-span-2 flex flex-col gap-4">
+        <div className="col-span-1 md:col-span-2 2xl:col-span-2 flex flex-col gap-4">
           <MonthlyBudgetCard />
           <OverviewCard />
+          <StatisticCard />
         </div>
       </section>
     </>
