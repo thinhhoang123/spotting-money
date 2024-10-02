@@ -1,5 +1,7 @@
 {
     "LOGIN": "Login",
     "LOGIN_SUBTITLE": "Enter your email below to login to your account.",
-    "CONTINUE_WITH": "Or continue with"
+    "CONTINUE_WITH": "Or continue with",
+    "SIGN_UP": "Sign Up",
+    "SIGN_UP_SUBTITLE": "Enter your email and username below to create to your account."
 }

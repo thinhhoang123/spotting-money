@@ -6,7 +6,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from 'recharts';
+import { Bar, BarChart, LabelList, XAxis } from 'recharts';
 export default function MonthlyBudgetCard() {
   return (
     <Card>
@@ -22,7 +22,6 @@ export default function MonthlyBudgetCard() {
               top: 20,
             }}
           >
-            <CartesianGrid vertical={false} />
             <XAxis
               dataKey="label"
               tickLine={false}
