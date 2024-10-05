@@ -1,8 +1,8 @@
+import ReactDatePicker from '@/components/date-picker';
 import Title from '@/components/title';
 import Typography from '@/components/typography';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DataTableDemo } from '@/components/ui/data-table';
-import DatePicker from '@/components/ui/date-picker';
 
 const cardData = [
   {
@@ -27,7 +27,7 @@ export default function Home() {
     <>
       <Title
         action={() => {
-          return <DatePicker />;
+          return <ReactDatePicker />;
         }}
       >
         Tracking Money

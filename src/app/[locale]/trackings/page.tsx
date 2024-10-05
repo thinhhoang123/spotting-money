@@ -2,10 +2,10 @@ import Title from '@/components/title';
 import Typography from '@/components/typography';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DataTableDemo } from '@/components/ui/data-table';
-import DatePicker from '@/components/ui/date-picker';
 import MonthlyBudgetCard from './_components/monthly-budget-card';
 import OverviewCard from './_components/overview-card';
 import StatisticCard from './_components/statistic-card';
+import ReactDatePicker from '@/components/date-picker';
 
 const cardData = [
   {
@@ -30,7 +30,7 @@ export default function TrackingsPage() {
     <>
       <Title
         action={() => {
-          return <DatePicker />;
+          return <ReactDatePicker />;
         }}
       >
         Tracking Money
