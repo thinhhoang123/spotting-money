@@ -1,11 +1,11 @@
 import Title from '@/components/title';
 import Typography from '@/components/typography';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { DataTableDemo } from '@/components/ui/data-table';
 import MonthlyBudgetCard from './_components/monthly-budget-card';
 import OverviewCard from './_components/overview-card';
 import StatisticCard from './_components/statistic-card';
 import ReactDatePicker from '@/components/date-picker';
+import TrackingTable from './_components/tracking-table';
 
 const cardData = [
   {
@@ -57,7 +57,7 @@ export default function TrackingsPage() {
 
       <section className="grid grid-cols-1 md:grid-cols-6 2xl:grid-cols-8 gap-4">
         <div className="col-span-1 md:col-span-4 2xl:col-span-6">
-          <DataTableDemo />
+          <TrackingTable />
         </div>
         <div className="col-span-1 md:col-span-2 2xl:col-span-2 flex flex-col gap-4">
           <MonthlyBudgetCard />
@@ -66,5 +66,5 @@ export default function TrackingsPage() {
         </div>
       </section>
     </>
-  );
+  )
 }
