@@ -2,7 +2,7 @@ import ReactDatePicker from '@/components/date-picker';
 import Title from '@/components/title';
 import Typography from '@/components/typography';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { DataTableDemo } from '@/components/ui/data-table';
+import React from 'react';
 
 const cardData = [
   {
@@ -24,7 +24,7 @@ const cardData = [
 ];
 export default function Home() {
   return (
-    <>
+    <React.Fragment>
       <Title
         action={() => {
           return <ReactDatePicker />;
@@ -52,9 +52,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex gap-4">
-        <DataTableDemo />
-      </section>
-    </>
+      <section className="flex gap-4">Hello</section>
+    </React.Fragment>
   );
 }

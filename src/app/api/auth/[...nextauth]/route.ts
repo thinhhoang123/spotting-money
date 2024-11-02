@@ -35,14 +35,14 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       console.log('TOKEN', { token });
-      if (user) {
-        await register({
-          email: token.email!,
-          name: token.name!,
-          password: '123456',
-        });
-        return { ...token, ...user };
-      }
+      // if (user) {
+      //   await register({
+      //     email: token.email!,
+      //     name: token.name!,
+      //     password: '123456',
+      //   });
+      //   return { ...token, ...user };
+      // }
       return token;
     },
     async session({ token, session }) {

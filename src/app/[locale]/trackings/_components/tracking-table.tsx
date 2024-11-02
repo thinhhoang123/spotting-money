@@ -14,7 +14,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { ColumnDef } from '@tanstack/react-table';
-import { Plus } from 'lucide-react';
+import React from 'react';
+import TransactionDialog from './transactionDialog';
 
 const data: Payment[] = [
   {
@@ -183,7 +184,7 @@ export const columns: ColumnDef<Payment>[] = [
 
 export default function TrackingTable() {
   return (
-    <>
+    <React.Fragment>
       <div className="pb-4 flex justify-between">
         <Input
           placeholder="Filter transaction..."
@@ -193,11 +194,9 @@ export default function TrackingTable() {
           // }
           className="max-w-sm"
         />
-        <Button>
-          <Plus className="mr-2 h-4 w-4" /> Transaction
-        </Button>
+        <TransactionDialog />
       </div>
       <DataTable data={data} columns={columns} />
-    </>
+    </React.Fragment>
   );
 }

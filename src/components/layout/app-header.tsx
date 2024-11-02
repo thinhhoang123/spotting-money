@@ -94,7 +94,7 @@ export default function AppHeader() {
   };
 
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 justify-between z-50">
+    <header className="sticky top-0 flex h-16 items-center gap-4 px-4 md:px-6 justify-between z-50 border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <div className="flex gap-2 items-center">
           <Image src="/logo.svg" width={32} height={32} alt="logo" />

@@ -8,7 +8,7 @@ export default function Title({
   action?: () => React.ReactNode;
 }) {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex flex-wrap justify-between items-center">
       <Typography type="h2">{children}</Typography>
       {action && action()}
     </div>

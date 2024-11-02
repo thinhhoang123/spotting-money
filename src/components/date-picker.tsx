@@ -1,45 +1,58 @@
 'use client';
+
+import * as React from 'react';
+import { CalendarIcon } from '@radix-ui/react-icons';
+import { format } from 'date-fns';
+
 import { cn } from '@/lib/utils';
-import { CalendarIcon } from 'lucide-react';
-import { forwardRef, useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { Button } from './ui/button';
-
-export default function ReactDatePicker({ className }: { className?: string }) {
-  const [startDate, setStartDate] = useState<Date | null>();
-
-  return (
-    <div className="w-auto">
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        customInput={<CustomInput />}
-        dateFormat="MM/yyyy"
-        className={cn(className)}
-        showMonthYearPicker
-      />
-    </div>
-  );
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import MonthPicker from './month-picker';
+type TModeDatePicker =
+  | 'default'
+  | 'multiple'
+  | 'single'
+  | 'range'
+  | 'month'
+  | undefined;
+// type TCalendar = Exclude<TModeDatePicker, 'month'>;
+interface IDatePickerProps {
+  mode: TModeDatePicker;
 }
 
-const CustomInput = forwardRef<
-  HTMLButtonElement,
-  { value?: any; onClick?: () => any; className?: string }
->(function CustomInput({ value, onClick, className }, ref) {
+export default function DatePicker({ mode = 'default' }: IDatePickerProps) {
+  const [date, setDate] = React.useState<Date>();
   return (
-    <Button
-      variant={'outline'}
-      onClick={onClick}
-      ref={ref}
-      className={cn(
-        'w-[280px] justify-start text-left font-normal',
-        !value && 'text-muted-foreground',
-        className
-      )}
-    >
-      <CalendarIcon className="mr-2 h-4 w-4" />
-      {value ? value : <span>Pick a date</span>}
-    </Button>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={'outline'}
+          className={cn(
+            'w-[240px] justify-start text-left font-normal',
+            !date && 'text-muted-foreground'
+          )}
+        >
+          <CalendarIcon />
+          {date ? format(date, 'PPP') : <span>Pick a date</span>}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        {mode === 'month' ? (
+          <MonthPicker selected={date} onSelect={setDate} />
+        ) : (
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            initialFocus
+          />
+        )}
+      </PopoverContent>
+    </Popover>
   );
-});
+}

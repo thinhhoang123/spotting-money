@@ -4,8 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import MonthlyBudgetCard from './_components/monthly-budget-card';
 import OverviewCard from './_components/overview-card';
 import StatisticCard from './_components/statistic-card';
-import ReactDatePicker from '@/components/date-picker';
 import TrackingTable from './_components/tracking-table';
+import React from 'react';
+import DatePicker from '@/components/date-picker';
 
 const cardData = [
   {
@@ -27,10 +28,10 @@ const cardData = [
 ];
 export default function TrackingsPage() {
   return (
-    <>
+    <React.Fragment>
       <Title
         action={() => {
-          return <ReactDatePicker />;
+          return <DatePicker mode="month" />;
         }}
       >
         Tracking Money
@@ -54,7 +55,6 @@ export default function TrackingsPage() {
           })}
         </div>
       </section>
-
       <section className="grid grid-cols-1 md:grid-cols-6 2xl:grid-cols-8 gap-4">
         <div className="col-span-1 md:col-span-4 2xl:col-span-6">
           <TrackingTable />
@@ -65,6 +65,6 @@ export default function TrackingsPage() {
           <StatisticCard />
         </div>
       </section>
-    </>
-  )
+    </React.Fragment>
+  );
 }
